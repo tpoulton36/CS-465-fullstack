@@ -27,4 +27,8 @@ export class TripData {
   public updateTrip(trip: Trip): Observable<Trip> {
     return this.http.put<Trip>(`${this.apiBaseUrl}/trips/${trip.code}`, trip);
   }
+
+  public deleteTrip(tripCode: string): Observable<any> {
+    return this.http.delete(`${this.apiBaseUrl}/trips/${tripCode}`);
+  }
 }

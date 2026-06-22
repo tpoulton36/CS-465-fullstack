@@ -1,5 +1,6 @@
 import { Component, OnInit, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 import { TripCard } from '../trip-card/trip-card';
 import { Trip } from '../models/trip';
@@ -18,7 +19,8 @@ export class TripListing implements OnInit {
 
   constructor(
     private tripDataService: TripData,
-    private changeDetectorRef: ChangeDetectorRef
+    private changeDetectorRef: ChangeDetectorRef,
+    private router: Router
   ) {}
 
   ngOnInit(): void {
@@ -37,5 +39,9 @@ export class TripListing implements OnInit {
         console.log('Error: ' + error);
       }
     });
+  }
+
+  public addTrip(): void {
+    this.router.navigate(['add-trip']);
   }
 }

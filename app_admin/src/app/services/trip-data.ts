@@ -16,7 +16,15 @@ export class TripData {
     return this.http.get<Trip[]>(`${this.apiBaseUrl}/trips`);
   }
 
+  public getTrip(tripCode: string): Observable<Trip> {
+    return this.http.get<Trip>(`${this.apiBaseUrl}/trips/${tripCode}`);
+  }
+
   public addTrip(trip: Trip): Observable<Trip> {
     return this.http.post<Trip>(`${this.apiBaseUrl}/trips`, trip);
+  }
+
+  public updateTrip(trip: Trip): Observable<Trip> {
+    return this.http.put<Trip>(`${this.apiBaseUrl}/trips/${trip.code}`, trip);
   }
 }

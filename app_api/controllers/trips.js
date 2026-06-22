@@ -45,8 +45,38 @@ const tripsAddTrip = async (req, res) => {
   }
 };
 
+const tripsUpdateTrip = async (req, res) => {
+  try {
+    const updatedTrip = await Trip.findOneAndUpdate(
+      { code: req.params.tripCode },
+      {
+        code: req.body.code,
+        name: req.body.name,
+        length: req.body.length,
+        start: req.body.start,
+        resort: req.body.resort,
+        perPerson: req.body.perPerson,
+        image: req.body.image,
+        description: req.body.description
+      },
+      { new: true }
+    );
+
+    if (!updatedTrip) {
+      return res.status(404).json({
+        message: 'Trip not found'
+      });
+    }
+
+    res.status(200).json(updatedTrip);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 module.exports = {
   tripsList,
   tripsFindCode,
-  tripsAddTrip
+  tripsAddTrip,
+  tripsUpdateTrip
 };

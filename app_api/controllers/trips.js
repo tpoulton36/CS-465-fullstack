@@ -26,7 +26,27 @@ const tripsFindCode = async (req, res) => {
   }
 };
 
+const tripsAddTrip = async (req, res) => {
+  try {
+    const newTrip = await Trip.create({
+      code: req.body.code,
+      name: req.body.name,
+      length: req.body.length,
+      start: req.body.start,
+      resort: req.body.resort,
+      perPerson: req.body.perPerson,
+      image: req.body.image,
+      description: req.body.description
+    });
+
+    res.status(201).json(newTrip);
+  } catch (err) {
+    res.status(400).json(err);
+  }
+};
+
 module.exports = {
   tripsList,
-  tripsFindCode
+  tripsFindCode,
+  tripsAddTrip
 };

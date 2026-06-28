@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
 import { Trip } from '../models/trip';
+import { User } from '../models/user';
+import { AuthResponse } from '../models/auth-response';
 
 @Injectable({
   providedIn: 'root'
@@ -30,5 +32,23 @@ export class TripData {
 
   public deleteTrip(tripCode: string): Observable<any> {
     return this.http.delete(`${this.apiBaseUrl}/trips/${tripCode}`);
+  }
+
+  public login(user: User, password: string): Observable<AuthResponse> {
+    return this.handleAuthAPICall('login', user, password);
+  }
+
+  public register(user: User, password: string): Observable<AuthResponse> {
+    return this.handleAuthAPICall('register', user, password);
+  }
+
+  private handleAuthAPICall(endpoint: string, user: User, password: string): Observable<AuthResponse> {
+    const formData = {
+      name: user.name,
+      email: user.email,
+      password: password
+    };
+
+    return this.http.post<AuthResponse>(`${this.apiBaseUrl}/${endpoint}`, formData);
   }
 }

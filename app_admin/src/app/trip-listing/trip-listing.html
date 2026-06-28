@@ -1,6 +1,6 @@
 <div class="row">
   <div class="col-12">
-    <button class="btn btn-info mb-3" (click)="addTrip()">Add Trip</button>
+    <button *ngIf="isLoggedIn()" class="btn btn-info mb-3" (click)="addTrip()">Add Trip</button>
   </div>
 </div>
 

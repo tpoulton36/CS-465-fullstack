@@ -1,0 +1,28 @@
+<nav class="navbar navbar-expand navbar-dark bg-dark">
+  <div class="container-fluid">
+
+    <a class="navbar-brand" routerLink="/">
+      Travlr Admin
+    </a>
+
+    <div class="navbar-nav ms-auto">
+
+      <button
+        *ngIf="!authenticationService.isLoggedIn()"
+        type="button"
+        class="btn btn-link nav-link"
+        (click)="router.navigate(['/login'])">
+        Login
+      </button>
+
+      <button
+        *ngIf="authenticationService.isLoggedIn()"
+        type="button"
+        class="btn btn-link nav-link"
+        (click)="logout()">
+        Logout
+      </button>
+
+    </div>
+  </div>
+</nav>
